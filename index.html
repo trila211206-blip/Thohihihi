@@ -122,7 +122,9 @@ function typeEffect(){
 }
 
 function startLove(){
-    document.getElementById("bgm").play();
+    const music = document.getElementById("bgm");
+    music.volume = 0.4; // 0.0 đến 1.0 (0.3 = 30%)
+    music.play();
     typeEffect();
     document.querySelector("button").style.display="none";
 }

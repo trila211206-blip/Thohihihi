@@ -123,8 +123,19 @@ function typeEffect(){
 
 function startLove(){
     const music = document.getElementById("bgm");
-    music.volume = 0.4; // 0.0 đến 1.0 (0.3 = 30%)
+    music.volume = 0;
     music.play();
+
+    let vol = 0;
+    const fade = setInterval(() => {
+        if(vol < 0.4){
+            vol += 0.02;
+            music.volume = vol;
+        } else {
+            clearInterval(fade);
+        }
+    }, 200);
+
     typeEffect();
     document.querySelector("button").style.display="none";
 }

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gửi Thỏ 💖</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: radial-gradient(circle at top, #ff758c, #ff7eb3);
+    overflow:hidden;
+    color:white;
+    text-align:center;
+}
+
+.container{
+    z-index:2;
+}
+
+.heart{
+    width:120px;
+    height:120px;
+    background:red;
+    position:relative;
+    margin:0 auto;
+    transform: rotate(-45deg);
+    animation: beat 1s infinite;
+    box-shadow:0 0 40px rgba(255,0,0,0.8);
+}
+
+.heart::before,
+.heart::after{
+    content:"";
+    width:120px;
+    height:120px;
+    background:red;
+    border-radius:50%;
+    position:absolute;
+}
+
+.heart::before{ top:-60px; left:0;}
+.heart::after{ left:60px; top:0;}
+
+@keyframes beat{
+    0%,100%{ transform: rotate(-45deg) scale(1);}
+    50%{ transform: rotate(-45deg) scale(1.2);}
+}
+
+h1{
+    margin-top:40px;
+    font-size:35px;
+    min-height:60px;
+}
+
+button{
+    margin-top:30px;
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#ff4b7d;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#ff4b7d;
+    color:white;
+}
+
+/* hiệu ứng sao */
+.star{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:white;
+    border-radius:50%;
+    animation: fall 5s linear infinite;
+}
+
+@keyframes fall{
+    0%{ transform:translateY(-100px); opacity:1;}
+    100%{ transform:translateY(100vh); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="heart"></div>
+    <h1 id="text"></h1>
+    <button onclick="startLove()">Bấm vào đây đi Thỏ 💌</button>
+</div>
+
+<audio id="bgm" loop>
+    <source src="nhac.mp3" type="audio/mp3">
+</audio>
+
+<script>
+const message = "Anh biết là Thỏ đang hong đc vui nên là anh mong điều này có thể giúp Thỏ đỡ hơn một xíu 💖. Hôm nay là valentine, mặc dù mình chưa quen nhau nhưng mà anh muốn làm nhưng điều mà có thể giúp Thỏ vui hơn dù là nhỏ nhất, nhiều khi anh thấy Thỏ buồn hay có chuyện gì hong vui là anh thương lắm, kiểu cũng muốn Thỏ đc duii, hãy nhớ là anh sẽ luôn ở bên Thỏ và có mặt bất cứ lúc nào Thỏ cần ạ. Nên là mong điều này có thể giúp Thỏ thấy vui hơn ạ. 💖 Anh yêu Thỏ 💖";
+let i = 0;
+
+function typeEffect(){
+    if(i < message.length){
+        document.getElementById("text").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeEffect, 70);
+    }
+}
+
+function startLove(){
+    document.getElementById("bgm").play();
+    typeEffect();
+    document.querySelector("button").style.display="none";
+}
+
+/* tạo sao rơi */
+function createStar(){
+    const star = document.createElement("div");
+    star.classList.add("star");
+    star.style.left = Math.random()*window.innerWidth + "px";
+    star.style.animationDuration = (Math.random()*3+2)+"s";
+    document.body.appendChild(star);
+
+    setTimeout(()=>{ star.remove(); },5000);
+}
+
+setInterval(createStar,200);
+</script>
+
+</body>
+</html>
